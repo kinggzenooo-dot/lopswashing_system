@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Suppliers — Lops Carwash</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            LOPS<span class="dot"> CARWASH</span>
+        </div>
+
+        <div class="sidebar-role" id="userRole">
+            Loading...
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <!-- DASHBOARD -->
+                <li>
+                    <a href="/dashboard">
+                        <span class="ic">▣</span>
+                        Dashboard
+                    </a>
+                </li>
+
+                <!-- PRODUCTS -->
+                <li>
+                    <a href="/products">
+                        <span class="ic">🏷</span>
+                        Supplies
+                    </a>
+                </li>
+
+                <!-- CUSTOMERS -->
+                <li>
+                    <a href="/customer">
+                        <span class="ic">👤</span>
+                        Customers
+                    </a>
+                </li>
+
+                <!-- SUPPLIERS -->
+                <li id="suppliersMenu">
+                    <a href="/supplier" class="active">
+                        <span class="ic">🚚</span>
+                        Suppliers
+                    </a>
+                </li>
+
+                <!-- SALES -->
+                <li>
+                    <a href="/sales">
+                        <span class="ic">🛒</span>
+                        Sales
+                    </a>
+                </li>
+
+                <!-- REPORTS -->
+                <li>
+                    <a href="/report">
+                        <span class="ic">📊</span>
+                        Reports
+                    </a>
+                </li>
+
+                <!-- USERS -->
+                <li id="usersMenu">
+                    <a href="#">
+                        <span class="ic">🛡</span>
+                        Users
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+        <div class="sidebar-foot">
+
+            <a href="#" id="logoutButton">
+                <span class="ic">⏻</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <div class="main-topbar">
+
+            <div>
+
+                <h1>
+                    Suppliers
+                </h1>
+
+                <p>
+                    Manage Lops Carwash suppliers and supply partners.
+                </p>
+
+            </div>
+
+            <div class="topbar-meta">
+
+                <strong id="currentDate">
+                    Loading date...
+                </strong>
+
+                <span>
+                    Lops Carwash Operations
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUPPLIER STAT CARDS -->
+        <div class="stat-grid">
+
+            <!-- TOTAL SUPPLIERS -->
+            <div class="stat-card c-cyan">
+
+                <div class="stat-label">
+                    Total Suppliers
+                    <span>🚚</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalSuppliers">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    Registered suppliers
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE SUPPLIERS -->
+            <div class="stat-card c-volt">
+
+                <div class="stat-label">
+                    Active Suppliers
+                    <span>✓</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="activeSuppliers">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    Currently active
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCTS SUPPLIED -->
+            <div class="stat-card c-magenta">
+
+                <div class="stat-label">
+                    Products Supplied
+                    <span>🏷</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="productsSupplied">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    Supplied products
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUPPLIER MANAGEMENT -->
+        <div class="panel recent-panel">
+
+            <div class="panel-head">
+
+                <div>
+
+                    <h2>
+                        Supplier Management
+                    </h2>
+
+                    <p style="margin-top:5px;">
+                        View and manage Lops Carwash suppliers.
+                    </p>
+
+                </div>
+
+                <button
+                    id="addSupplierButton"
+                    class="btn-primary">
+                    + Add Supplier
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH -->
+            <div
+                style="
+                    display:flex;
+                    gap:10px;
+                    margin:20px 0;
+                    align-items:center;
+                "
+            >
+
+                <input
+                    type="text"
+                    id="supplierSearch"
+                    placeholder="Search suppliers..."
+                    style="
+                        flex:1;
+                        padding:12px 15px;
+                        border-radius:8px;
+                        border:1px solid #ddd;
+                        font-size:14px;
+                        outline:none;
+                    "
+                >
+
+                <button
+                    id="searchSupplierButton"
+                    class="btn-primary">
+                    Search
+                </button>
+
+            </div>
+
+
+            <!-- SUPPLIER TABLE -->
+            <div style="overflow-x:auto;">
+
+                <table
+                    style="
+                        width:100%;
+                        border-collapse:collapse;
+                        margin-top:10px;
+                    "
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                ID
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Supplier Name
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Contact Person
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Email
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Mobile
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Status
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="supplierTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                style="
+                                    text-align:center;
+                                    padding:30px;
+                                    color:#888;
+                                "
+                            >
+                                Loading suppliers...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- ADD / EDIT SUPPLIER MODAL -->
+<div
+    id="supplierModal"
+    style="
+        display:none;
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.5);
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+    "
+>
+
+    <div
+        style="
+            background:white;
+            width:480px;
+            max-width:90%;
+            border-radius:12px;
+            padding:25px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        "
+    >
+
+        <!-- MODAL HEADER -->
+        <div
+            style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:20px;
+            "
+        >
+
+            <h2 id="supplierModalTitle">
+                Add Supplier
+            </h2>
+
+            <button
+                id="closeSupplierModal"
+                style="
+                    border:none;
+                    background:none;
+                    font-size:24px;
+                    cursor:pointer;
+                "
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- SUPPLIER FORM -->
+        <form id="supplierForm">
+
+            <input
+                type="hidden"
+                id="supplierId"
+            >
+
+
+            <!-- SUPPLIER NAME -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Supplier Name
+                </label>
+
+                <input
+                    type="text"
+                    id="supplierName"
+                    placeholder="Enter supplier name"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <!-- CONTACT PERSON -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Contact Person
+                </label>
+
+                <input
+                    type="text"
+                    id="contactPerson"
+                    placeholder="Enter contact person"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <!-- EMAIL -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="supplierEmail"
+                    placeholder="Enter supplier email"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <!-- MOBILE -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    type="text"
+                    id="supplierMobile"
+                    placeholder="Enter mobile number"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <!-- ADDRESS -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Address
+                </label>
+
+                <textarea
+                    id="supplierAddress"
+                    placeholder="Enter supplier address"
+                    rows="3"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                        resize:vertical;
+                    "
+                ></textarea>
+
+            </div>
+
+
+            <!-- STATUS -->
+            <div style="margin-bottom:20px;">
+
+                <label>
+                    Status
+                </label>
+
+                <select
+                    id="supplierStatus"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+                    <option value="Active">
+                        Active
+                    </option>
+
+                    <option value="Inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+            <div
+                style="
+                    display:flex;
+                    justify-content:flex-end;
+                    gap:10px;
+                "
+            >
+
+                <button
+                    type="button"
+                    id="cancelSupplier"
+                    style="
+                        padding:11px 18px;
+                        border:none;
+                        border-radius:7px;
+                        cursor:pointer;
+                    "
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                    style="
+                        padding:11px 18px;
+                        border:none;
+                        border-radius:7px;
+                        cursor:pointer;
+                    "
+                >
+                    Save Supplier
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script src="/js/main.js"></script>
+<script src="/js/suppliers.js"></script>
+
+</body>
+</html>

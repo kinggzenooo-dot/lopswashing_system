@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Wash — Lops Carwash</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/register.css">
+</head>
+<body class="register-page">
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">LOPS<span class="dot"> CARWASH</span></a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#footer">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="/login" class="login-pill">Login</a>
+      <button class="nav-toggle" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="register-hero">
+  <div class="register-glow-a"></div>
+  <div class="register-glow-b"></div>
+
+  <div class="container register-grid">
+
+    <div class="register-pitch">
+      <span class="hero-eyebrow">Free to join</span>
+      <h1>YOUR CLEAN<br><span>STARTS HERE</span></h1>
+      <p>Create your Lops Carwash account to keep track of your visits and get convenient access to our wash services.</p>
+
+      <ul class="perk-list">
+        <li><span class="ic">📦</span> Track every order in one place</li>
+        <li><span class="ic">⚡</span> Faster repeat bookings</li>
+        <li><span class="ic">🎁</span> Member-only discount codes</li>
+      </ul>
+    </div>
+
+    <div class="register-card">
+      <h2>Create Account</h2>
+      <p class="sub">// customer signup</p>
+
+      <form id="registerForm">
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Juan Dela Cruz" required>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" name="email" placeholder="you@email.com" required>
+          </div>
+          <div class="field">
+            <label for="regPhone">Phone</label>
+            <input type="tel" id="regPhone" name="phone" placeholder="0917 123 4567">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" name="password" placeholder="••••••••" required minlength="8">
+          </div>
+          <div class="field">
+            <label for="regConfirm">Confirm Password</label>
+            <input type="password" id="regConfirm" name="confirmPassword" placeholder="••••••••" required minlength="8">
+          </div>
+        </div>
+        <p class="field-hint">Minimum 8 characters</p>
+
+        <div class="check-row">
+          <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+          <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary register-btn">Create Account</button>
+        <p id="registerMessage" role="status" aria-live="polite" style="display:none; margin:14px 0 0;"></p>
+      </form>
+
+      <p class="register-foot">Already have an account? <a href="/login">Log in</a></p>
+    </div>
+
+  </div>
+</section>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

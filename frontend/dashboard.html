@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard — Lops Carwash</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      LOPS<span class="dot"> CARWASH</span>
+    </div>
+
+    <!-- This will be changed automatically -->
+    <div class="sidebar-role" id="userRole">
+      Loading...
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <ul>
+
+        <li>
+          <a href="/dashboard" class="active">
+            <span class="ic">▣</span>
+            Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a href="/products">
+            <span class="ic">🏷</span>
+            Services
+          </a>
+        </li>
+
+        <li>
+          <a href="/customer">
+            <span class="ic">👤</span>
+            Customers
+          </a>
+        </li>
+
+        <!-- Hidden for Staff by main.js -->
+        <li id="suppliersMenu">
+          <a href="/supplier">
+            <span class="ic">🚚</span>
+            Suppliers
+          </a>
+        </li>
+
+        <li>
+          <a href="/sales">
+            <span class="ic">🛒</span>
+            Sales
+          </a>
+        </li>
+
+        <li>
+          <a href="/report">
+            <span class="ic">📊</span>
+            Reports
+          </a>
+        </li>
+
+        <!-- Only Administrator -->
+        <li id="usersMenu">
+          <a href="#">
+            <span class="ic">🛡</span>
+            Users
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <!-- LOGOUT -->
+    <div class="sidebar-foot">
+
+      <a href="#" id="logoutButton">
+        <span class="ic">⏻</span>
+        Logout
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- TOP BAR -->
+    <div class="main-topbar">
+
+      <div>
+
+        <h1>
+          Welcome,
+          <span id="userFullname">
+            Administrator
+          </span>
+        </h1>
+
+        <p>
+          Here's what's happening at Lops Carwash today.
+        </p>
+
+      </div>
+
+      <div class="topbar-meta">
+
+        <strong id="currentDate">
+          Loading date...
+        </strong>
+
+        <span>
+          Lops Carwash Operations
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- STAT CARDS -->
+    <div class="stat-grid">
+
+      <!-- PRODUCTS -->
+      <div class="stat-card c-volt">
+
+        <div class="stat-label">
+          Services
+          <span>🏷</span>
+        </div>
+
+        <div
+          class="stat-value"
+          id="totalProducts">
+          0
+        </div>
+
+        <div class="stat-delta">
+          Active wash services
+        </div>
+
+      </div>
+
+
+      <!-- CUSTOMERS -->
+      <div class="stat-card c-cyan">
+
+        <div class="stat-label">
+          Customers
+          <span>👤</span>
+        </div>
+
+        <div
+          class="stat-value"
+          id="totalCustomers">
+          0
+        </div>
+
+        <div class="stat-delta">
+          Registered customers
+        </div>
+
+      </div>
+
+
+      <!-- SALES -->
+      <div class="stat-card c-magenta">
+
+        <div class="stat-label">
+          Sales
+          <span>₱</span>
+        </div>
+
+        <div
+          class="stat-value"
+          id="totalSales">
+          ₱0.00
+        </div>
+
+        <div class="stat-delta">
+          Total sales
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- LOW STOCK / SALES -->
+    <div class="panel-grid">
+
+
+      <!-- SALES SUMMARY -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <h2>
+            Sales Summary
+          </h2>
+
+          <span class="panel-tag">
+            This week
+          </span>
+
+        </div>
+
+
+        <div class="chart-wrap">
+
+          <div class="chart-bar">
+            <div class="bar" style="height:45%"></div>
+            <span class="day">Mon</span>
+          </div>
+
+          <div class="chart-bar">
+            <div class="bar" style="height:70%"></div>
+            <span class="day">Tue</span>
+          </div>
+
+          <div class="chart-bar">
+            <div class="bar" style="height:38%"></div>
+            <span class="day">Wed</span>
+          </div>
+
+          <div class="chart-bar">
+            <div class="bar" style="height:88%"></div>
+            <span class="day">Thu</span>
+          </div>
+
+          <div class="chart-bar">
+            <div class="bar" style="height:60%"></div>
+            <span class="day">Fri</span>
+          </div>
+
+          <div class="chart-bar">
+            <div class="bar" style="height:30%"></div>
+            <span class="day">Sat</span>
+          </div>
+
+          <div class="chart-bar">
+            <div class="bar" style="height:20%"></div>
+            <span class="day">Sun</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- LOW STOCK -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <h2>
+            Low Stock
+          </h2>
+
+          <span class="panel-tag" id="lowStock">
+            0 items
+          </span>
+
+        </div>
+
+
+        <div
+          class="stock-list"
+          id="lowStockList">
+
+          <p>
+            Loading stock information...
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RECENT TRANSACTIONS -->
+    <div class="panel recent-panel">
+
+      <div class="panel-head">
+
+        <h2>
+          Recent Transactions
+        </h2>
+
+      </div>
+
+      <div
+        id="recentTransactions"
+        class="transaction-list">
+
+        <p>
+          Loading transactions...
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script src="/js/main.js"></script>
+
+</body>
+</html>

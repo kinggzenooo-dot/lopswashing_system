@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Services — Lops Carwash</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/products.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            LOPS<span class="dot"> CARWASH</span>
+        </div>
+
+        <div class="sidebar-role">
+            Administrator
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li>
+                    <a href="/dashboard">
+                        <span class="ic">▣</span>
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/products" class="active">
+                        <span class="ic">🏷</span>
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/customer">
+                        <span class="ic">👤</span>
+                        Customers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/supplier">
+                        <span class="ic">🚚</span>
+                        Suppliers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/sales">
+                        <span class="ic">🛒</span>
+                        Sales
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/report">
+                        <span class="ic">📊</span>
+                        Reports
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="ic">🛡</span>
+                        Users
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-foot">
+
+            <a href="#" id="logoutButton">
+
+                <span class="ic">⏻</span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="main-topbar">
+
+            <div>
+
+                <h1>
+                    Services
+                </h1>
+
+                <p>
+                    Manage your wash packages and service menu.
+                    category and stock count.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             TOOLBAR
+        ======================================= -->
+
+        <div class="toolbar">
+
+            <div class="search-field">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search service..."
+                >
+
+            </div>
+
+
+            <div class="toolbar-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="openAddSticker"
+                >
+                    + Add Service
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ======================================
+             PRODUCTS TABLE
+        ======================================= -->
+
+        <div class="table-panel">
+
+            <div class="table-scroll">
+
+                <table
+                    class="data-table"
+                    id="productsTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Service
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Stock
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <!-- IMPORTANT:
+                         main.js loads products here -->
+
+                    <tbody id="productsTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                style="text-align:center;"
+                            >
+                                Loading services...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- ==========================================
+     ADD STICKER MODAL
+=========================================== -->
+
+<div
+    class="modal-overlay"
+    id="addStickerOverlay"
+>
+
+    <div class="modal">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="modal-head">
+
+            <h2>
+                Add Service
+            </h2>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeAddSticker"
+            >
+                ✕
+            </button>
+
+        </div>
+<!-- ==========================================
+     EDIT STICKER MODAL
+=========================================== -->
+
+
+
+        <!-- ======================================
+             ADD PRODUCT FORM
+        ======================================= -->
+
+        <form
+            id="addStickerForm"
+            enctype="multipart/form-data"
+        >
+
+
+            <!-- IMAGE -->
+
+            <div
+                class="form-field full"
+                style="margin-bottom:16px;"
+            >
+
+                <label for="prodImage">
+                    Service Image
+                </label>
+
+                <input
+                    type="file"
+                    id="prodImage"
+                    name="image"
+                    accept=".png,.jpg,.jpeg,.webp"
+                    required
+                >
+
+                <div
+                    id="imagePreview"
+                    class="image-preview"
+                ></div>
+
+            </div>
+
+
+
+            <!-- FORM GRID -->
+
+            <div class="form-grid">
+
+
+                <!-- PRODUCT NAME -->
+
+                <div class="form-field full">
+
+                    <label for="prodName">
+                        Service Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="prodName"
+                        name="product_name"
+                        placeholder="e.g. Combo Breaker"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SKU -->
+
+                <div class="form-field">
+
+                    <label for="prodSku">
+                        SKU
+                    </label>
+
+                    <input
+                        type="text"
+                        id="prodSku"
+                        name="sku"
+                        placeholder="SKU-GM-002"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-field">
+
+                    <label for="prodCategory">
+                        Category
+                    </label>
+
+                    <select
+                        id="prodCategory"
+                        name="category"
+                        required
+                    >
+
+                        <option value="Exterior Wash">
+                            Exterior Wash
+                        </option>
+
+                        <option value="Full Service">
+                            Full Service
+                        </option>
+
+                        <option value="Gamer">
+                            Gamer
+                        </option>
+
+                        <option value="Aesthetic">
+                            Aesthetic
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-field full">
+
+                    <label for="prodDesc">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="prodDesc"
+                        name="description"
+                        placeholder="Short description of the design..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="form-field">
+
+                    <label for="prodPrice">
+                        Price (₱)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="prodPrice"
+                        name="price"
+                        placeholder="15"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- STOCK -->
+
+                <div class="form-field">
+
+                    <label for="prodStock">
+                        Stock
+                    </label>
+
+                    <input
+                        type="number"
+                        id="prodStock"
+                        name="stock"
+                        placeholder="100"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- REORDER LEVEL -->
+
+                <div class="form-field full">
+
+                    <label for="prodReorder">
+                        Reorder Level
+                    </label>
+
+                    <input
+                        type="number"
+                        id="prodReorder"
+                        name="reorder_level"
+                        placeholder="10"
+                        value="10"
+                        min="0"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- MODAL FOOTER -->
+
+            <div class="modal-footer">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Save Service
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MESSAGE MODAL
+===================================================== -->
+
+<div class="modal-overlay" id="messageModal">
+    <div class="modal small-modal">
+
+        <div class="modal-head">
+            <h2 id="messageModalTitle">Message</h2>
+
+            <button
+                class="modal-close"
+                id="closeMessageModal">
+                ✕
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <p id="messageModalText"></p>
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-primary"
+                id="messageModalOK">
+                OK
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- =====================================================
+     CONFIRM DELETE MODAL
+===================================================== -->
+
+<div class="modal-overlay" id="deleteModal">
+
+    <div class="modal small-modal">
+
+        <div class="modal-head">
+
+            <h2>Delete Service</h2>
+
+            <button
+                class="modal-close"
+                id="closeDeleteModal">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <p>
+                Are you sure you want to delete this service?
+            </p>
+
+            <p id="deleteProductName"></p>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn"
+                id="cancelDelete">
+                Cancel
+            </button>
+
+            <button
+                class="btn btn-danger"
+                id="confirmDelete">
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     EDIT STICKER MODAL
+===================================================== -->
+
+<div class="modal-overlay" id="editStickerOverlay">
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <h2>Edit Service</h2>
+
+            <button
+                class="modal-close"
+                id="closeEditSticker">
+                ✕
+            </button>
+
+        </div>
+
+        <form
+            id="editStickerForm"
+            enctype="multipart/form-data">
+
+            <input
+                type="hidden"
+                id="editProductId">
+
+            <div class="form-field full">
+
+                <label>
+                    Service Image
+                </label>
+
+                <input
+                    type="file"
+                    id="editProdImage"
+                    name="image"
+                    accept="image/png,image/jpeg,image/jpg,image/webp">
+
+                <div id="editImagePreview"></div>
+
+                <small>
+                    Leave empty if you don't want to change the image.
+                </small>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-field full">
+
+                    <label>
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editProdName"
+                        name="product_name"
+                        required>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        SKU
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editProdSku"
+                        name="sku"
+                        required>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select
+                        id="editProdCategory"
+                        name="category">
+
+                        <option value="Exterior Wash">
+                            Exterior Wash
+                        </option>
+
+                        <option value="Full Service">
+                            Full Service
+                        </option>
+
+                        <option value="Gamer">
+                            Gamer
+                        </option>
+
+                        <option value="Aesthetic">
+                            Aesthetic
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-field full">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        id="editProdDesc"
+                        name="description"></textarea>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Price (₱)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editProdPrice"
+                        name="price"
+                        step="0.01"
+                        required>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label>
+                        Stock
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editProdStock"
+                        name="stock"
+                        required>
+
+                </div>
+
+
+                <div class="form-field full">
+
+                    <label>
+                        Reorder Level
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editProdReorder"
+                        name="reorder_level"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+<!-- =====================================================
+     EDIT STICKER MODAL
+===================================================== -->
+
+<div class="modal-overlay" id="editStickerOverlay">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h2>Edit Service</h2>
+
+      <button
+        type="button"
+        class="modal-close"
+        id="closeEditSticker">
+        ✕
+      </button>
+    </div>
+
+    <form
+      id="editStickerForm"
+      enctype="multipart/form-data">
+
+      <!-- Hidden Product ID -->
+      <input
+        type="hidden"
+        id="editProductId"
+        name="id">
+
+      <!-- IMAGE -->
+
+      <div
+        class="form-field full"
+        style="margin-bottom:16px;">
+
+        <label for="editProdImage">
+          Service Image
+        </label>
+
+        <input
+          type="file"
+          id="editProdImage"
+          name="image"
+          accept="image/png,image/jpeg,image/jpg,image/webp">
+
+        <div
+          id="editImagePreview"
+          class="image-preview">
+        </div>
+
+      </div>
+
+
+      <!-- FORM GRID -->
+
+      <div class="form-grid">
+
+        <!-- NAME -->
+
+        <div class="form-field full">
+
+          <label for="editProdName">
+            Product Name
+          </label>
+
+          <input
+            type="text"
+            id="editProdName"
+            name="product_name"
+            required>
+
+        </div>
+
+
+        <!-- SKU -->
+
+        <div class="form-field">
+
+          <label for="editProdSku">
+            SKU
+          </label>
+
+          <input
+            type="text"
+            id="editProdSku"
+            name="sku"
+            required>
+
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <div class="form-field">
+
+          <label for="editProdCategory">
+            Category
+          </label>
+
+          <select
+            id="editProdCategory"
+            name="category">
+
+            <option value="Exterior Wash">
+              Exterior Wash
+            </option>
+
+            <option value="Full Service">
+              Full Service
+            </option>
+
+            <option value="Gamer">
+              Gamer
+            </option>
+
+            <option value="Aesthetic">
+              Aesthetic
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="form-field full">
+
+          <label for="editProdDesc">
+            Description
+          </label>
+
+          <textarea
+            id="editProdDesc"
+            name="description">
+          </textarea>
+
+        </div>
+
+
+        <!-- PRICE -->
+
+        <div class="form-field">
+
+          <label for="editProdPrice">
+            Price (₱)
+          </label>
+
+          <input
+            type="number"
+            id="editProdPrice"
+            name="price"
+            step="0.01"
+            required>
+
+        </div>
+
+
+        <!-- STOCK -->
+
+        <div class="form-field">
+
+          <label for="editProdStock">
+            Stock
+          </label>
+
+          <input
+            type="number"
+            id="editProdStock"
+            name="stock"
+            required>
+
+        </div>
+
+
+        <!-- REORDER -->
+
+        <div class="form-field full">
+
+          <label for="editProdReorder">
+            Reorder Level
+          </label>
+
+          <input
+            type="number"
+            id="editProdReorder"
+            name="reorder_level"
+            value="10">
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn"
+          id="cancelEditSticker">
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary">
+          Update Service
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+<!-- ==========================================
+     JAVASCRIPT
+=========================================== -->
+
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

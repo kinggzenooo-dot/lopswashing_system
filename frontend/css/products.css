@@ -1,0 +1,145 @@
+/* ============================================================
+   SERVICES — carwash service menu
+   ============================================================ */
+
+/* ---------- toolbar ---------- */
+.toolbar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap; margin-bottom:24px;
+}
+.toolbar-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+
+.search-field{
+  position:relative;
+  display:flex; align-items:center;
+}
+.search-field span{
+  position:absolute; left:14px; color:var(--muted-2); font-size:13px; pointer-events:none;
+}
+.search-field input{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:11px 14px 11px 34px;
+  color:var(--text);
+  font-family:var(--f-body);
+  font-size:13px;
+  width:230px;
+}
+.search-field input::placeholder{ color:var(--muted-2); }
+.search-field input:focus{ outline:none; border-color:var(--cyan); box-shadow:0 0 0 3px rgba(58,217,255,0.12); }
+
+/* ---------- table panel ---------- */
+.table-panel{
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+  overflow:hidden;
+}
+.table-scroll{ overflow-x:auto; }
+.data-table{ width:100%; border-collapse:collapse; min-width:720px; }
+.data-table thead th{
+  text-align:left;
+  font-family:var(--f-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
+  color:var(--muted); padding:16px 20px; border-bottom:1px solid var(--line);
+  background:var(--bg-soft);
+}
+.data-table tbody td{
+  padding:14px 20px;
+  border-bottom:1px solid var(--line-soft);
+  font-size:14px;
+  vertical-align:middle;
+}
+.data-table tbody tr:last-child td{ border-bottom:none; }
+.data-table tbody tr:hover{ background:rgba(198,255,61,0.03); }
+
+.cell-product{ display:flex; align-items:center; gap:12px; }
+.thumb{
+  width:44px; height:44px; border-radius:8px; border:2px solid var(--line);
+  background:var(--bg-soft); display:flex; align-items:center; justify-content:center;
+  overflow:hidden; flex-shrink:0;
+}
+.thumb svg{ width:70%; height:70%; }
+.cell-name{ font-family:var(--f-body); font-weight:600; }
+.cell-sku{ font-family:var(--f-mono); font-size:11px; color:var(--muted-2); }
+
+.chip{
+  display:inline-block; font-family:var(--f-mono); font-size:10px; text-transform:uppercase; letter-spacing:0.06em;
+  padding:4px 10px; border-radius:999px; border:1px solid var(--line);
+}
+.chip-skate{ color:var(--volt); border-color:rgba(198,255,61,0.4); }
+.chip-anime{ color:var(--magenta); border-color:rgba(255,46,126,0.4); }
+.chip-gamer{ color:var(--cyan); border-color:rgba(58,217,255,0.4); }
+.chip-aesthetic{ color:var(--muted); border-color:var(--line); }
+
+.price-cell{ font-family:var(--f-mono); color:var(--volt); }
+.stock-cell{ font-family:var(--f-mono); }
+.stock-cell.low{ color:var(--warn); }
+
+.row-actions{ display:flex; gap:8px; }
+.icon-btn{
+  width:30px; height:30px; border-radius:6px; border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--muted);
+}
+.icon-btn:hover{ border-color:var(--cyan); color:var(--cyan); }
+.icon-btn.danger:hover{ border-color:var(--magenta); color:var(--magenta); }
+
+/* ---------- modal ---------- */
+.modal-overlay{
+  position:fixed; inset:0; background:rgba(6,6,8,0.72);
+  display:none; align-items:center; justify-content:center;
+  padding:24px; z-index:100;
+}
+.modal-overlay.open{ display:flex; }
+.modal{
+  width:100%; max-width:520px;
+  background:var(--surface); border:1px solid var(--line); border-radius:16px;
+  padding:30px 30px 26px;
+  max-height:90vh; overflow-y:auto;
+  position:relative;
+  box-shadow:0 30px 60px rgba(0,0,0,0.55);
+}
+.modal::before{
+  content:''; position:absolute; top:0; left:24px; right:24px; height:3px;
+  background:linear-gradient(90deg, var(--volt), var(--cyan), var(--magenta));
+  border-radius:0 0 3px 3px;
+}
+.modal-head{
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:22px;
+}
+.modal-head h2{ font-family:var(--f-display); font-size:20px; text-transform:uppercase; margin:0; }
+.modal-close{
+  background:none; border:1px solid var(--line); color:var(--muted);
+  width:30px; height:30px; border-radius:8px; font-size:14px;
+}
+.modal-close:hover{ border-color:var(--magenta); color:var(--magenta); }
+
+.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px 14px; }
+.form-grid .full{ grid-column:1 / -1; }
+.form-field label{
+  display:block; font-family:var(--f-mono); font-size:11px; text-transform:uppercase;
+  letter-spacing:0.08em; color:var(--muted); margin-bottom:7px;
+}
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width:100%;
+  background:var(--bg-soft); border:1px solid var(--line); border-radius:8px;
+  padding:11px 12px; color:var(--text); font-family:var(--f-body); font-size:13px;
+}
+.form-field textarea{ resize:vertical; min-height:70px; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus{
+  outline:none; border-color:var(--volt); box-shadow:0 0 0 3px rgba(198,255,61,0.12);
+}
+.upload-box{
+  border:1.5px dashed var(--line); border-radius:10px; padding:22px;
+  text-align:center; color:var(--muted-2); font-family:var(--f-mono); font-size:12px;
+}
+.upload-box:hover{ border-color:var(--cyan); color:var(--cyan); }
+
+.modal-footer{ margin-top:22px; display:flex; justify-content:flex-end; }
+.modal-footer .btn{ width:100%; justify-content:center; }
+
+@media (max-width:560px){
+  .form-grid{ grid-template-columns:1fr; }
+  .toolbar{ align-items:stretch; }
+  .search-field input{ width:100%; }
+}

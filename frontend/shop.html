@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lops Carwash 3.0</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="logo">LOPS<span class="dot"> CARWASH</span></div>
+      <div class="sidebar-role">Customer</div>
+      <nav class="sidebar-nav"><ul>
+        <li><a href="/shop" class="active"><span class="ic">🏪</span>Shop</a></li>
+        <li><a href="#cart"><span class="ic">🛒</span>Cart <span id="cartCount">0</span></a></li>
+        <li><a href="#orders"><span class="ic">📦</span>My Orders</a></li>
+      </ul></nav>
+      <div class="sidebar-foot"><a href="#" id="logoutButton"><span class="ic">⏻</span>Logout</a></div>
+    </aside>
+    <main class="main">
+      <div class="main-topbar"><div><h1>Welcome, <span id="customerName">Customer</span></h1><p>Choose a car care service and keep up with your visits.</p></div></div>
+      <section class="panel recent-panel"><div class="panel-head"><div><h2>Available Services</h2><p style="margin-top:5px">Your next clean is waiting.</p></div></div><div id="shopProducts" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px"><p>Loading services...</p></div></section>
+      <section class="panel recent-panel" id="cart"><div class="panel-head"><div><h2>Your Booking</h2><p style="margin-top:5px">Review your services before checkout.</p></div></div><div id="cartItems"><p>Your booking is empty.</p></div><div style="display:flex;gap:14px;justify-content:flex-end;align-items:end;flex-wrap:wrap;margin-top:18px"><label>Payment method<br><select id="paymentMethod" style="margin-top:6px;padding:10px"><option>Cash</option><option>GCash</option><option>Bank Transfer</option></select></label><strong id="cartTotal" style="font-size:20px">₱0.00</strong><button id="checkoutButton" class="btn-primary" style="padding:11px 18px;border:0;border-radius:7px">Confirm Booking</button></div><p id="checkoutMessage" role="status" style="display:none;margin:14px 0 0"></p></section>
+      <section class="panel recent-panel" id="orders"><div class="panel-head"><div><h2>My Orders</h2><p style="margin-top:5px">Your recorded purchases.</p></div></div><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:14px">Invoice</th><th style="text-align:left;padding:14px">Date</th><th style="text-align:left;padding:14px">Items</th><th style="text-align:right;padding:14px">Total</th><th style="text-align:left;padding:14px">Payment</th></tr></thead><tbody id="ordersBody"><tr><td colspan="5" style="padding:30px;text-align:center">Loading orders...</td></tr></tbody></table></div></section>
+    </main>
+  </div>
+  <script src="/js/main.js"></script>
+  <script src="/js/shop.js"></script>
+</body>
+</html>

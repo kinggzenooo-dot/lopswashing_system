@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sales — Lops Carwash</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            LOPS<span class="dot"> CARWASH</span>
+        </div>
+
+        <div class="sidebar-role" id="userRole">
+            Loading...
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <!-- DASHBOARD -->
+                <li>
+                    <a href="/dashboard">
+                        <span class="ic">▣</span>
+                        Dashboard
+                    </a>
+                </li>
+
+                <!-- PRODUCTS -->
+                <li>
+                    <a href="/products">
+                        <span class="ic">🏷</span>
+                        Services
+                    </a>
+                </li>
+
+                <!-- CUSTOMERS -->
+                <li>
+                    <a href="/customer">
+                        <span class="ic">👤</span>
+                        Customers
+                    </a>
+                </li>
+
+                <!-- SUPPLIERS -->
+                <li id="suppliersMenu">
+                    <a href="/supplier">
+                        <span class="ic">🚚</span>
+                        Suppliers
+                    </a>
+                </li>
+
+                <!-- SALES -->
+                <li>
+                    <a href="/sales" class="active">
+                        <span class="ic">🛒</span>
+                        Sales
+                    </a>
+                </li>
+
+                <!-- REPORTS -->
+                <li>
+                    <a href="/report">
+                        <span class="ic">📊</span>
+                        Reports
+                    </a>
+                </li>
+
+                <!-- USERS -->
+                <li id="usersMenu">
+                    <a href="#">
+                        <span class="ic">🛡</span>
+                        Users
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+        <div class="sidebar-foot">
+
+            <a href="#" id="logoutButton">
+                <span class="ic">⏻</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <div class="main-topbar">
+
+            <div>
+
+                <h1>
+                    Sales
+                </h1>
+
+                <p>
+                    Manage Lops Carwash sales and service transactions.
+                </p>
+
+            </div>
+
+            <div class="topbar-meta">
+
+                <strong id="currentDate">
+                    Loading date...
+                </strong>
+
+                <span>
+                    Lops Carwash Operations
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SALES STAT CARDS -->
+        <div class="stat-grid">
+
+            <!-- TOTAL SALES -->
+            <div class="stat-card c-magenta">
+
+                <div class="stat-label">
+                    Total Sales
+                    <span>₱</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalSales">
+                    ₱0.00
+                </div>
+
+                <div class="stat-delta">
+                    All-time sales
+                </div>
+
+            </div>
+
+
+            <!-- TODAY SALES -->
+            <div class="stat-card c-cyan">
+
+                <div class="stat-label">
+                    Today's Sales
+                    <span>📅</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="todaySales">
+                    ₱0.00
+                </div>
+
+                <div class="stat-delta">
+                    Sales today
+                </div>
+
+            </div>
+
+
+            <!-- TRANSACTIONS -->
+            <div class="stat-card c-volt">
+
+                <div class="stat-label">
+                    Transactions
+                    <span>🛒</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="totalTransactions">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    Total transactions
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SALES MANAGEMENT PANEL -->
+        <div class="panel recent-panel">
+
+            <div class="panel-head">
+
+                <div>
+
+                    <h2>
+                        Sales Transactions
+                    </h2>
+
+                    <p style="margin-top:5px;">
+                        View and manage Lops Carwash sales.
+                    </p>
+
+                </div>
+
+                <button
+                    id="addSaleButton"
+                    class="btn-primary">
+                    + New Sale
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH / FILTER -->
+            <div
+                style="
+                    display:flex;
+                    gap:10px;
+                    margin:20px 0;
+                    align-items:center;
+                    flex-wrap:wrap;
+                "
+            >
+
+                <input
+                    type="text"
+                    id="salesSearch"
+                    placeholder="Search transactions..."
+                    style="
+                        flex:1;
+                        min-width:220px;
+                        padding:12px 15px;
+                        border-radius:8px;
+                        border:1px solid #ddd;
+                        font-size:14px;
+                        outline:none;
+                    "
+                >
+
+
+                <input
+                    type="date"
+                    id="salesDateFilter"
+                    style="
+                        padding:12px 15px;
+                        border-radius:8px;
+                        border:1px solid #ddd;
+                        font-size:14px;
+                        outline:none;
+                    "
+                >
+
+
+                <button
+                    id="searchSalesButton"
+                    class="btn-primary">
+                    Search
+                </button>
+
+            </div>
+
+
+            <!-- SALES TABLE -->
+            <div style="overflow-x:auto;">
+
+                <table
+                    style="
+                        width:100%;
+                        border-collapse:collapse;
+                        margin-top:10px;
+                    "
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                ID
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Date
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Customer
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Product
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:center;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Quantity
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:right;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Total
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:center;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Payment
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="salesTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                style="
+                                    text-align:center;
+                                    padding:30px;
+                                    color:#888;
+                                "
+                            >
+                                Loading sales...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- SALES SUMMARY -->
+        <div class="panel-grid">
+
+            <!-- WEEKLY SALES -->
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <h2>
+                        Weekly Sales
+                    </h2>
+
+                    <span class="panel-tag">
+                        This week
+                    </span>
+
+                </div>
+
+
+                <div class="chart-wrap">
+
+                    <div class="chart-bar">
+
+                        <div
+                            class="bar"
+                            id="monBar"
+                            style="height:20%">
+                        </div>
+
+                        <span class="day">
+                            Mon
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-bar">
+
+                        <div
+                            class="bar"
+                            id="tueBar"
+                            style="height:35%">
+                        </div>
+
+                        <span class="day">
+                            Tue
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-bar">
+
+                        <div
+                            class="bar"
+                            id="wedBar"
+                            style="height:50%">
+                        </div>
+
+                        <span class="day">
+                            Wed
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-bar">
+
+                        <div
+                            class="bar"
+                            id="thuBar"
+                            style="height:70%">
+                        </div>
+
+                        <span class="day">
+                            Thu
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-bar">
+
+                        <div
+                            class="bar"
+                            id="friBar"
+                            style="height:90%">
+                        </div>
+
+                        <span class="day">
+                            Fri
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-bar">
+
+                        <div
+                            class="bar"
+                            id="satBar"
+                            style="height:55%">
+                        </div>
+
+                        <span class="day">
+                            Sat
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-bar">
+
+                        <div
+                            class="bar"
+                            id="sunBar"
+                            style="height:30%">
+                        </div>
+
+                        <span class="day">
+                            Sun
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOP PRODUCTS -->
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <h2>
+                        Top Selling Products
+                    </h2>
+
+                    <span class="panel-tag">
+                        This month
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="topProductsList"
+                    class="stock-list"
+                >
+
+                    <p>
+                        Loading products...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- NEW SALE MODAL -->
+<div
+    id="saleModal"
+    style="
+        display:none;
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.5);
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+    "
+>
+
+    <div
+        style="
+            background:white;
+            width:500px;
+            max-width:90%;
+            max-height:90vh;
+            overflow-y:auto;
+            border-radius:12px;
+            padding:25px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        "
+    >
+
+        <!-- MODAL HEADER -->
+        <div
+            style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:20px;
+            "
+        >
+
+            <h2>
+                New Sale
+            </h2>
+
+            <button
+                id="closeSaleModal"
+                style="
+                    border:none;
+                    background:none;
+                    font-size:24px;
+                    cursor:pointer;
+                "
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- SALE FORM -->
+        <form id="saleForm">
+
+            <!-- CUSTOMER -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Customer
+                </label>
+
+                <select
+                    id="saleCustomer"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+                    <option value="">
+                        Select Customer
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PRODUCT -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Product
+                </label>
+
+                <select
+                    id="saleProduct"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+                    <option value="">
+                        Select Product
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- QUANTITY -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="saleQuantity"
+                    min="1"
+                    value="1"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <!-- PRICE -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Unit Price
+                </label>
+
+                <input
+                    type="number"
+                    id="salePrice"
+                    min="0"
+                    step="0.01"
+                    placeholder="₱0.00"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <!-- TOTAL -->
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Total Amount
+                </label>
+
+                <input
+                    type="text"
+                    id="saleTotal"
+                    value="₱0.00"
+                    readonly
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                        background:#f5f5f5;
+                    "
+                >
+
+            </div>
+
+
+            <!-- PAYMENT METHOD -->
+            <div style="margin-bottom:20px;">
+
+                <label>
+                    Payment Method
+                </label>
+
+                <select
+                    id="paymentMethod"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+                    <option value="">
+                        Select Payment Method
+                    </option>
+
+                    <option value="Cash">
+                        Cash
+                    </option>
+
+                    <option value="GCash">
+                        GCash
+                    </option>
+
+                    <option value="Bank Transfer">
+                        Bank Transfer
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+            <div
+                style="
+                    display:flex;
+                    justify-content:flex-end;
+                    gap:10px;
+                "
+            >
+
+                <button
+                    type="button"
+                    id="cancelSale"
+                    style="
+                        padding:11px 18px;
+                        border:none;
+                        border-radius:7px;
+                        cursor:pointer;
+                    "
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                    style="
+                        padding:11px 18px;
+                        border:none;
+                        border-radius:7px;
+                        cursor:pointer;
+                    "
+                >
+                    Save Sale
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script src="/js/main.js"></script>
+<script src="/js/sales.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,578 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customers — Lops Carwash</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            LOPS<span class="dot"> CARWASH</span>
+        </div>
+
+        <div class="sidebar-role" id="userRole">
+            Loading...
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <!-- DASHBOARD -->
+                <li>
+                    <a href="/dashboard">
+                        <span class="ic">▣</span>
+                        Dashboard
+                    </a>
+                </li>
+
+                <!-- PRODUCTS -->
+                <li>
+                    <a href="/products">
+                        <span class="ic">🏷</span>
+                        Services
+                    </a>
+                </li>
+
+                <!-- CUSTOMERS -->
+                <li>
+                    <a href="/customer" class="active">
+                        <span class="ic">👤</span>
+                        Customers
+                    </a>
+                </li>
+
+                <!-- SUPPLIERS -->
+                <li id="suppliersMenu">
+                    <a href="/supplier">
+                        <span class="ic">🚚</span>
+                        Suppliers
+                    </a>
+                </li>
+
+                <!-- SALES -->
+                <li>
+                    <a href="/sales">
+                        <span class="ic">🛒</span>
+                        Sales
+                    </a>
+                </li>
+
+                <!-- REPORTS -->
+                <li>
+                    <a href="/report">
+                        <span class="ic">📊</span>
+                        Reports
+                    </a>
+                </li>
+
+                <!-- USERS -->
+                <li id="usersMenu">
+                    <a href="#">
+                        <span class="ic">🛡</span>
+                        Users
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <!-- LOGOUT -->
+        <div class="sidebar-foot">
+
+            <a href="#" id="logoutButton">
+                <span class="ic">⏻</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <div class="main-topbar">
+
+            <div>
+
+                <h1>
+                    Customers
+                </h1>
+
+                <p>
+                    Manage Lops Carwash customers and their information.
+                </p>
+
+            </div>
+
+            <div class="topbar-meta">
+
+                <strong id="currentDate">
+                    Loading date...
+                </strong>
+
+                <span>
+                    Lops Carwash Operations
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CUSTOMER STAT CARDS -->
+        <div class="stat-grid">
+
+            <!-- TOTAL CUSTOMERS -->
+            <div class="stat-card c-cyan">
+
+                <div class="stat-label">
+                    Total Customers
+                    <span>👤</span>
+                </div>
+
+                <div class="stat-value" id="totalCustomers">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    Registered customers
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE CUSTOMERS -->
+            <div class="stat-card c-volt">
+
+                <div class="stat-label">
+                    Active Customers
+                    <span>✓</span>
+                </div>
+
+                <div class="stat-value" id="activeCustomers">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    Currently active
+                </div>
+
+            </div>
+
+
+            <!-- NEW CUSTOMERS -->
+            <div class="stat-card c-magenta">
+
+                <div class="stat-label">
+                    New Customers
+                    <span>★</span>
+                </div>
+
+                <div class="stat-value" id="newCustomers">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    This month
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CUSTOMER MANAGEMENT PANEL -->
+        <div class="panel recent-panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <h2>
+                        Customer Management
+                    </h2>
+
+                    <p style="margin-top: 5px;">
+                        View and manage registered customers.
+                    </p>
+                </div>
+
+                <button
+                    id="addCustomerButton"
+                    class="btn-primary">
+                    + Add Customer
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH -->
+            <div
+                style="
+                    display:flex;
+                    gap:10px;
+                    margin:20px 0;
+                    align-items:center;
+                "
+            >
+
+                <input
+                    type="text"
+                    id="customerSearch"
+                    placeholder="Search customers..."
+                    style="
+                        flex:1;
+                        padding:12px 15px;
+                        border-radius:8px;
+                        border:1px solid #ddd;
+                        font-size:14px;
+                        outline:none;
+                    "
+                >
+
+                <button
+                    id="searchCustomerButton"
+                    class="btn-primary">
+                    Search
+                </button>
+
+            </div>
+
+
+            <!-- CUSTOMER TABLE -->
+            <div style="overflow-x:auto;">
+
+                <table
+                    style="
+                        width:100%;
+                        border-collapse:collapse;
+                        margin-top:10px;
+                    "
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                ID
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Customer Name
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Email
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Mobile
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Status
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="customerTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                style="
+                                    text-align:center;
+                                    padding:30px;
+                                    color:#888;
+                                "
+                            >
+                                Loading customers...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- ADD CUSTOMER MODAL -->
+<div
+    id="customerModal"
+    style="
+        display:none;
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.5);
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+    "
+>
+
+    <div
+        style="
+            background:white;
+            width:450px;
+            max-width:90%;
+            border-radius:12px;
+            padding:25px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        "
+    >
+
+        <div
+            style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:20px;
+            "
+        >
+
+            <h2 id="customerModalTitle">
+                Add Customer
+            </h2>
+
+            <button
+                id="closeCustomerModal"
+                style="
+                    border:none;
+                    background:none;
+                    font-size:24px;
+                    cursor:pointer;
+                "
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="customerForm">
+
+            <input
+                type="hidden"
+                id="customerId"
+            >
+
+
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="customerEmail"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <div style="margin-bottom:15px;">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    type="text"
+                    id="customerMobile"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+            </div>
+
+
+            <div style="margin-bottom:20px;">
+
+                <label>
+                    Status
+                </label>
+
+                <select
+                    id="customerStatus"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin-top:6px;
+                        border:1px solid #ddd;
+                        border-radius:7px;
+                        box-sizing:border-box;
+                    "
+                >
+
+                    <option value="Active">
+                        Active
+                    </option>
+
+                    <option value="Inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:flex-end;
+                    gap:10px;
+                "
+            >
+
+                <button
+                    type="button"
+                    id="cancelCustomer"
+                    style="
+                        padding:11px 18px;
+                        border:none;
+                        border-radius:7px;
+                        cursor:pointer;
+                    "
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                    style="
+                        padding:11px 18px;
+                        border:none;
+                        border-radius:7px;
+                        cursor:pointer;
+                    "
+                >
+                    Save Customer
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script src="/js/main.js"></script>
+<script src="/js/customers.js"></script>
+
+</body>
+</html>
+```

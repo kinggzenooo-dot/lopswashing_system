@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports — Lops Carwash</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            LOPS<span class="dot"> CARWASH</span>
+        </div>
+
+        <div class="sidebar-role" id="userRole">
+            Loading...
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <!-- DASHBOARD -->
+                <li>
+                    <a href="/dashboard">
+                        <span class="ic">▣</span>
+                        Dashboard
+                    </a>
+                </li>
+
+                <!-- PRODUCTS -->
+                <li>
+                    <a href="/products">
+                        <span class="ic">🏷</span>
+                        Services
+                    </a>
+                </li>
+
+                <!-- CUSTOMERS -->
+                <li>
+                    <a href="/customer">
+                        <span class="ic">👤</span>
+                        Customers
+                    </a>
+                </li>
+
+                <!-- SUPPLIERS -->
+                <li id="suppliersMenu">
+                    <a href="/supplier">
+                        <span class="ic">🚚</span>
+                        Suppliers
+                    </a>
+                </li>
+
+                <!-- SALES -->
+                <li>
+                    <a href="/sales">
+                        <span class="ic">🛒</span>
+                        Sales
+                    </a>
+                </li>
+
+                <!-- REPORTS -->
+                <li>
+                    <a href="/report" class="active">
+                        <span class="ic">📊</span>
+                        Reports
+                    </a>
+                </li>
+
+                <!-- USERS -->
+                <li id="usersMenu">
+                    <a href="#">
+                        <span class="ic">🛡</span>
+                        Users
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+        <div class="sidebar-foot">
+
+            <a href="#" id="logoutButton">
+                <span class="ic">⏻</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <div class="main-topbar">
+
+            <div>
+
+                <h1>
+                    Reports
+                </h1>
+
+                <p>
+                    View Lops Carwash business reports and performance.
+                </p>
+
+            </div>
+
+            <div class="topbar-meta">
+
+                <strong id="currentDate">
+                    Loading date...
+                </strong>
+
+                <span>
+                    Lops Carwash Operations
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- REPORT SUMMARY CARDS -->
+        <div class="stat-grid">
+
+            <!-- SALES -->
+            <div class="stat-card c-magenta">
+
+                <div class="stat-label">
+                    Total Sales
+                    <span>₱</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="reportTotalSales">
+                    ₱0.00
+                </div>
+
+                <div class="stat-delta">
+                    Selected period
+                </div>
+
+            </div>
+
+
+            <!-- TRANSACTIONS -->
+            <div class="stat-card c-cyan">
+
+                <div class="stat-label">
+                    Transactions
+                    <span>🛒</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="reportTransactions">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    Completed transactions
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCTS SOLD -->
+            <div class="stat-card c-volt">
+
+                <div class="stat-label">
+                    Products Sold
+                    <span>🏷</span>
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="reportProductsSold">
+                    0
+                </div>
+
+                <div class="stat-delta">
+                    Total quantity sold
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REPORT FILTER -->
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+
+                    <h2>
+                        Report Filter
+                    </h2>
+
+                    <p style="margin-top:5px;">
+                        Select the period you want to analyze.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    gap:15px;
+                    align-items:end;
+                    flex-wrap:wrap;
+                    margin-top:20px;
+                "
+            >
+
+                <!-- START DATE -->
+                <div>
+
+                    <label>
+                        Start Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="startDate"
+                        style="
+                            display:block;
+                            margin-top:6px;
+                            padding:12px;
+                            border:1px solid #ddd;
+                            border-radius:7px;
+                        "
+                    >
+
+                </div>
+
+
+                <!-- END DATE -->
+                <div>
+
+                    <label>
+                        End Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="endDate"
+                        style="
+                            display:block;
+                            margin-top:6px;
+                            padding:12px;
+                            border:1px solid #ddd;
+                            border-radius:7px;
+                        "
+                    >
+
+                </div>
+
+
+                <!-- REPORT TYPE -->
+                <div>
+
+                    <label>
+                        Report Type
+                    </label>
+
+                    <select
+                        id="reportType"
+                        style="
+                            display:block;
+                            margin-top:6px;
+                            padding:12px;
+                            min-width:180px;
+                            border:1px solid #ddd;
+                            border-radius:7px;
+                        "
+                    >
+
+                        <option value="sales">
+                            Sales Report
+                        </option>
+
+                        <option value="products">
+                            Product Report
+                        </option>
+
+                        <option value="customers">
+                            Customer Report
+                        </option>
+
+                        <option value="suppliers">
+                            Supplier Report
+                        </option>
+
+                        <option value="inventory">
+                            Inventory Report
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- GENERATE -->
+                <button
+                    id="generateReportButton"
+                    class="btn-primary"
+                    style="
+                        padding:12px 20px;
+                        border:none;
+                        border-radius:7px;
+                        cursor:pointer;
+                    "
+                >
+                    Generate Report
+                </button>
+
+
+                <!-- PRINT -->
+                <button
+                    id="printReportButton"
+                    style="
+                        padding:12px 20px;
+                        border:none;
+                        border-radius:7px;
+                        cursor:pointer;
+                    "
+                >
+                    🖨 Print
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SALES REPORT -->
+        <div class="panel recent-panel">
+
+            <div class="panel-head">
+
+                <div>
+
+                    <h2>
+                        Sales Report
+                    </h2>
+
+                    <p style="margin-top:5px;">
+                        Sales performance for the selected period.
+                    </p>
+
+                </div>
+
+                <span
+                    class="panel-tag"
+                    id="reportPeriod">
+                    All Time
+                </span>
+
+            </div>
+
+
+            <!-- SALES TABLE -->
+            <div style="overflow-x:auto;">
+
+                <table
+                    style="
+                        width:100%;
+                        border-collapse:collapse;
+                        margin-top:15px;
+                    "
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Date
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Customer
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Product
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:center;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Qty
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:right;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Unit Price
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:right;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Total
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="reportTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                style="
+                                    text-align:center;
+                                    padding:30px;
+                                    color:#888;
+                                "
+                            >
+                                Select a date range and generate a report.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- REPORT ANALYTICS -->
+        <div class="panel-grid">
+
+            <!-- TOP PRODUCTS -->
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <h2>
+                        Top Products
+                    </h2>
+
+                    <span class="panel-tag">
+                        Best sellers
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="topProductsReport"
+                    class="stock-list"
+                >
+
+                    <p>
+                        No report generated.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOP CUSTOMERS -->
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <h2>
+                        Top Customers
+                    </h2>
+
+                    <span class="panel-tag">
+                        By spending
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="topCustomersReport"
+                    class="stock-list"
+                >
+
+                    <p>
+                        No report generated.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INVENTORY REPORT -->
+        <div class="panel recent-panel">
+
+            <div class="panel-head">
+
+                <div>
+
+                    <h2>
+                        Inventory Summary
+                    </h2>
+
+                    <p style="margin-top:5px;">
+                        Current product inventory status.
+                    </p>
+
+                </div>
+
+                <span
+                    class="panel-tag"
+                    id="inventoryStatus">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div style="overflow-x:auto;">
+
+                <table
+                    style="
+                        width:100%;
+                        border-collapse:collapse;
+                    "
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Product
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:left;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Category
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:center;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Stock
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:right;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Price
+                            </th>
+
+                            <th
+                                style="
+                                    text-align:center;
+                                    padding:14px;
+                                    border-bottom:1px solid #ddd;
+                                "
+                            >
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="inventoryReportBody">
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                style="
+                                    text-align:center;
+                                    padding:30px;
+                                    color:#888;
+                                "
+                            >
+                                Loading inventory...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script src="/js/main.js"></script>
+<script src="/js/reports.js"></script>
+
+</body>
+</html>

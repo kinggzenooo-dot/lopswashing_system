@@ -1,0 +1,241 @@
+/* ============================================================
+   INDEX — Lops Carwash storefront
+   ============================================================ */
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(13,13,15,0.88);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line-soft);
+}
+.site-header .container{
+  display:flex; align-items:center; justify-content:space-between;
+  height:76px;
+}
+.logo{
+  font-family:var(--f-display);
+  font-size:24px;
+  letter-spacing:0.02em;
+  display:flex; align-items:center; gap:8px;
+}
+.logo .dot{ color:var(--volt); }
+
+.main-nav ul{ display:flex; align-items:center; gap:34px; }
+.main-nav a{
+  font-family:var(--f-mono);
+  font-size:13px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  position:relative;
+  padding:6px 0;
+}
+.main-nav a:hover{ color:var(--text); }
+.main-nav a.active{ color:var(--volt); }
+.main-nav a::after{
+  content:''; position:absolute; left:0; bottom:-2px;
+  width:0; height:2px; background:var(--volt);
+  transition:width .2s ease;
+}
+.main-nav a:hover::after{ width:100%; }
+
+.header-actions{ display:flex; align-items:center; gap:16px; }
+.login-pill{
+  font-family:var(--f-mono);
+  font-size:12px; text-transform:uppercase; letter-spacing:0.06em;
+  padding:9px 18px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:var(--text);
+}
+.login-pill:hover{ border-color:var(--volt); color:var(--volt); }
+
+.nav-toggle{ display:none; background:none; border:none; color:var(--text); font-size:26px; }
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:88px 0 70px;
+  border-bottom:1px solid var(--line-soft);
+}
+.hero::before{
+  content:'';
+  position:absolute; inset:0;
+  background-image: radial-gradient(rgba(198,255,61,0.05) 1px, transparent 1px);
+  background-size:16px 16px;
+  pointer-events:none;
+}
+.hero-glow{
+  position:absolute; width:520px; height:520px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,46,126,0.22), transparent 70%);
+  top:-220px; right:-160px; pointer-events:none;
+}
+.hero-grid{
+  position:relative;
+  display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center;
+}
+.hero-eyebrow{
+  font-family:var(--f-mono); font-size:13px; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--cyan); margin-bottom:18px;
+  display:inline-flex; align-items:center; gap:10px;
+}
+.hero-eyebrow::before{ content:''; width:8px; height:8px; background:var(--cyan); border-radius:50%; box-shadow:0 0 10px var(--cyan); }
+
+.hero h1{
+  font-family:var(--f-display);
+  font-size:clamp(42px, 6vw, 76px);
+  line-height:0.98;
+  letter-spacing:0.01em;
+  margin:0 0 22px;
+  text-transform:uppercase;
+}
+.hero h1 span{ color:var(--volt); }
+.hero p.lead{
+  font-size:17px; color:var(--muted); max-width:440px; margin:0 0 32px;
+}
+.hero-cta{ display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
+.hero-note{ font-family:var(--f-mono); font-size:12px; color:var(--muted-2); }
+
+.hero-visual{ position:relative; height:420px; }
+.sticker-cluster{ position:relative; width:100%; height:100%; }
+.sticker-tile{
+  position:absolute;
+  border-radius:16px;
+  border:3px solid var(--text);
+  box-shadow:var(--shadow-hard);
+  overflow:hidden;
+  background:var(--surface-2);
+}
+.sticker-tile img{ width:100%; height:100%; object-fit:cover; }
+.sticker-tile.t1{ width:230px; height:230px; top:0; left:20px; transform:rotate(-9deg); z-index:3; border-color:var(--volt); }
+.sticker-tile.t2{ width:170px; height:170px; top:40px; right:0; transform:rotate(11deg); z-index:2; border-color:var(--magenta); }
+.sticker-tile.t3{ width:150px; height:150px; bottom:0; left:70px; transform:rotate(6deg); z-index:1; border-color:var(--cyan); }
+
+/* ---------- section shell ---------- */
+.section{ padding:80px 0; }
+.section-head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-bottom:38px; gap:24px; flex-wrap:wrap;
+}
+.section-head h2{
+  font-family:var(--f-display);
+  font-size:clamp(28px,3.4vw,42px);
+  text-transform:uppercase; margin:10px 0 0; letter-spacing:0.01em;
+}
+.section-head p{ color:var(--muted); max-width:420px; margin:0; }
+
+/* ---------- product grid (sticker-bomb cards) ---------- */
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+  gap:30px 26px;
+  padding-top:8px;
+}
+.product-card{
+  position:relative;
+  background:var(--surface);
+  border:3px solid var(--text);
+  border-radius:16px;
+  padding:0 0 18px;
+  box-shadow:var(--shadow-hard);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.product-card:nth-child(odd){ transform:rotate(-1.6deg); }
+.product-card:nth-child(even){ transform:rotate(1.4deg); }
+.product-card:hover{ transform:rotate(0deg) translateY(-6px); box-shadow:8px 10px 0 rgba(0,0,0,0.55); }
+
+.product-card .badge{
+  position:absolute; top:-12px; left:16px;
+  font-family:var(--f-mono); font-size:10px; letter-spacing:0.08em;
+  text-transform:uppercase;
+  background:var(--volt); color:var(--on-volt);
+  padding:4px 9px; border-radius:4px; border:2px solid var(--bg);
+  z-index:2;
+}
+.product-media{
+  aspect-ratio:1/1;
+  border-bottom:3px solid var(--text);
+  background:var(--surface-2);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; border-radius:13px 13px 0 0;
+}
+.product-media img{ width:100%; height:100%; object-fit:cover; }
+.product-body{ padding:16px 18px 0; }
+.product-cat{
+  font-family:var(--f-mono); font-size:11px; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--cyan); margin-bottom:6px;
+}
+.product-name{ font-family:var(--f-display); font-size:20px; text-transform:uppercase; margin:0 0 10px; letter-spacing:0.01em; }
+.product-row{ display:flex; align-items:center; justify-content:space-between; margin-top:6px; }
+.product-price{ font-family:var(--f-mono); font-size:18px; font-weight:700; color:var(--volt); }
+.product-btn{
+  font-family:var(--f-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.06em;
+  padding:8px 14px; border-radius:5px; border:1px solid var(--line); color:var(--text);
+}
+.product-btn:hover{ background:var(--volt); color:var(--on-volt); border-color:var(--volt); }
+
+/* ---------- why choose us ---------- */
+.why-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2px;
+  background:var(--line-soft); border:1px solid var(--line-soft); border-radius:16px; overflow:hidden;
+}
+.why-card{ background:var(--bg-soft); padding:30px 26px; }
+.why-num{ font-family:var(--f-mono); font-size:12px; color:var(--muted-2); margin-bottom:14px; }
+.why-icon{ font-size:26px; margin-bottom:14px; }
+.why-card h3{ font-family:var(--f-display); font-size:19px; text-transform:uppercase; margin:0 0 8px; letter-spacing:0.01em; }
+.why-card p{ color:var(--muted); font-size:14px; margin:0; }
+
+/* ---------- footer ---------- */
+.site-footer{
+  border-top:1px solid var(--line-soft);
+  padding:56px 0 28px;
+  background:
+    linear-gradient(var(--bg-soft), var(--bg-soft)),
+    radial-gradient(circle at 15% 0%, rgba(255,46,126,0.08), transparent 55%);
+}
+.footer-grid{
+  display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;
+  padding-bottom:36px; border-bottom:1px solid var(--line-soft);
+}
+.footer-brand .logo{ margin-bottom:12px; }
+.footer-brand p{ color:var(--muted); font-size:14px; max-width:280px; }
+.footer-social{ display:flex; gap:12px; margin-top:18px; }
+.footer-social a{
+  width:38px; height:38px; border:1px solid var(--line); border-radius:8px;
+  display:flex; align-items:center; justify-content:center; font-size:15px;
+}
+.footer-social a:hover{ border-color:var(--volt); color:var(--volt); }
+.footer-col h4{
+  font-family:var(--f-mono); font-size:12px; text-transform:uppercase; letter-spacing:0.1em;
+  color:var(--muted-2); margin:0 0 16px;
+}
+.footer-col li{ margin-bottom:10px; }
+.footer-col a{ color:var(--muted); font-size:14px; }
+.footer-col a:hover{ color:var(--volt); }
+.footer-bottom{
+  display:flex; justify-content:space-between; align-items:center; padding-top:24px;
+  font-family:var(--f-mono); font-size:12px; color:var(--muted-2); flex-wrap:wrap; gap:10px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .hero-visual{ height:320px; margin-top:20px; }
+  .footer-grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:680px){
+  .main-nav{ display:none; }
+  .nav-toggle{ display:block; }
+  .footer-grid{ grid-template-columns:1fr; }
+  .hero{ padding:56px 0 40px; }
+}
+
+/* Lops Carwash identity */
+.site-header{background:rgba(7,23,37,.9);border-color:rgba(127,230,255,.18)}
+.logo{font-family:var(--f-display);font-weight:800;letter-spacing:.04em}.logo .dot{color:var(--cyan);font-size:.72em}.logo-mark{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--volt);color:var(--on-volt);font-size:15px}
+.main-nav a.active,.main-nav a:hover{color:var(--cyan)}.main-nav a::after{background:var(--cyan)}.login-pill{border-color:rgba(127,230,255,.35)}.login-pill:hover{border-color:var(--cyan);color:var(--cyan)}
+.hero{padding:94px 0 82px;background:linear-gradient(120deg,#071725 20%,#0c2b42 100%)}.hero::before{background-image:radial-gradient(rgba(127,230,255,.1) 1px,transparent 1px)}.hero-glow{background:radial-gradient(circle,rgba(27,214,179,.22),transparent 68%)}.hero h1{font-weight:800;letter-spacing:-.06em}.hero h1 span{color:var(--cyan)}.hero-eyebrow{color:var(--volt)}.hero-eyebrow::before{background:var(--volt);box-shadow:0 0 10px var(--volt)}
+.car-visual{display:grid;place-items:center;overflow:hidden}.car-visual svg{width:min(100%,570px);position:relative;z-index:2}.shine-ring{position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(127,230,255,.25),transparent 68%)}.bubble{position:absolute;border:2px solid rgba(127,230,255,.55);border-radius:50%;z-index:1}.b1{width:38px;height:38px;top:50px;right:70px}.b2{width:18px;height:18px;top:112px;right:30px}.b3{width:26px;height:26px;bottom:42px;left:45px}.trust-strip{padding:18px 0;background:var(--volt);color:var(--on-volt);font-weight:700}.trust-strip .container{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.product-grid{grid-template-columns:repeat(4,1fr);gap:20px}.product-card{border:1px solid var(--line);border-radius:18px;padding-bottom:18px;box-shadow:var(--shadow-hard);transform:none!important}.product-card:hover{transform:translateY(-6px)!important;box-shadow:0 18px 40px rgba(0,0,0,.3)}.product-media{border-color:var(--line);background:linear-gradient(145deg,#17455f,#0e293b)}.wash-icon{font-size:62px}.product-body p{font-size:14px;color:var(--muted);min-height:64px;margin:0}.product-name{font-weight:800;letter-spacing:-.03em;text-transform:none}.badge{background:var(--magenta)!important}.site-footer{background:var(--bg-soft)}
+@media(max-width:900px){.product-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.product-grid{grid-template-columns:1fr}.trust-strip .container{justify-content:center}.hero-visual{height:260px}}
