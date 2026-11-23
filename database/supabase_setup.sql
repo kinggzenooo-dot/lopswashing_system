@@ -110,15 +110,16 @@ BEGIN
         INSERT INTO public.suppliers (supplier_name, contact_person, phone, email, address, status)
         VALUES ('Lops Auto Care Supplies', 'John Smith', '09112223333', 'supplier@gmail.com', 'Cebu City', 'Active');
 
-        -- Starter Products
+        -- Starter Products (Official Car Wash Packages & Detailing)
         INSERT INTO public.products (product_name, sku, category, description, price, stock, reorder_level)
         VALUES 
-            ('Express Wash', 'LCS-001', 'Exterior Wash', 'Foam wash, rinse, tire shine and hand dry', 150.00, 100, 10),
-            ('Kaiju Rider', 'STK-002', 'Anime', 'Neon kaiju rider vinyl sticker', 20.00, 50, 8),
-            ('Boss Fight', 'STK-003', 'Gaming', 'Controller-inspired waterproof sticker', 18.00, 60, 10),
-            ('Grind Line', 'STK-004', 'Skate', 'Skate deck line-art vinyl sticker', 15.00, 75, 10),
-            ('Ronin Ghost', 'STK-005', 'Anime', 'Ghost ronin holographic-style sticker', 20.00, 40, 8),
-            ('Retro Deck', 'STK-006', 'Skate', 'Retro arcade deck vinyl sticker', 16.00, 55, 10),
-            ('Combo Breaker', 'STK-007', 'Gaming', 'Arcade combo vinyl sticker', 15.00, 65, 10);
+            ('Express Wash', 'LCS-001', 'Exterior Wash', 'Foam wash, high-pressure rinse, tire dressing, and scratch-free microfiber hand dry. Fast 30-min service.', 150.00, 100, 10),
+            ('Full Service Wash', 'LCS-002', 'Inside & Out', 'Exterior foam wash plus interior cabin vacuum, dash & console wipe, window glass cleaning, and mat wash.', 250.00, 100, 10),
+            ('Premium Detail', 'LCS-003', 'Deep Clean', 'Comprehensive interior detailing, leather conditioner, hand carnauba wax seal, door jamb clean, and deodorizer.', 650.00, 50, 5),
+            ('Motorcycle Wash', 'LCS-004', 'Two Wheels', 'Delicate hand wash, wheel & chain degreasing, spotless rinse, air blower dry, and protective spray wax.', 100.00, 100, 10),
+            ('Interior Deep Clean & Sanitation', 'LCS-005', 'Interior Detailing', 'Deep shampoo extraction for fabric seats and carpets, steam sanitization, leather conditioning, and AC mist.', 450.00, 50, 5),
+            ('Ceramic Coating & Paint Shield', 'LCS-006', 'Paint Protection', 'Multi-stage clay bar decontamination, machine polish swirl removal, and nano-ceramic hydrophobic shield.', 1200.00, 30, 5),
+            ('Engine Bay Detailing', 'LCS-007', 'Engine Care', 'Safe degreasing of grease and road grime, delicate electrical masking, and high-temp rubber & plastic dressing.', 350.00, 40, 5),
+            ('Headlight Restoration', 'LCS-008', 'Restoration', 'Multi-grit wet sanding, optical compounding, and UV-resistant sealant to restore cloudy or yellowed lenses.', 250.00, 50, 5);
     END IF;
 END $$;

@@ -129,9 +129,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if (result.success) {
 
+                        const nextTarget = new URLSearchParams(window.location.search).get("next");
                         window.location.href =
                             result.user.role === "Customer"
-                                ? "/shop"
+                                ? (nextTarget || "/shop")
                                 : "/dashboard";
 
                     } else {

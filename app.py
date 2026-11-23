@@ -92,15 +92,80 @@ def auto_seed_database_if_needed(supabase: Client):
             "status": "Active"
         }).execute()
 
-        # 4. Starter Products Catalog
+        # 4. Starter Products Catalog (Official Car Wash Packages & Detailing)
         starter_products = [
-            {"product_name": "Express Wash", "sku": "LCS-001", "category": "Exterior Wash", "description": "Foam wash, rinse, tire shine and hand dry", "price": 150.00, "stock": 100, "reorder_level": 10},
-            {"product_name": "Kaiju Rider", "sku": "STK-002", "category": "Anime", "description": "Neon kaiju rider vinyl sticker", "price": 20.00, "stock": 50, "reorder_level": 8},
-            {"product_name": "Boss Fight", "sku": "STK-003", "category": "Gaming", "description": "Controller-inspired waterproof sticker", "price": 18.00, "stock": 60, "reorder_level": 10},
-            {"product_name": "Grind Line", "sku": "STK-004", "category": "Skate", "description": "Skate deck line-art vinyl sticker", "price": 15.00, "stock": 75, "reorder_level": 10},
-            {"product_name": "Ronin Ghost", "sku": "STK-005", "category": "Anime", "description": "Ghost ronin holographic-style sticker", "price": 20.00, "stock": 40, "reorder_level": 8},
-            {"product_name": "Retro Deck", "sku": "STK-006", "category": "Skate", "description": "Retro arcade deck vinyl sticker", "price": 16.00, "stock": 55, "reorder_level": 10},
-            {"product_name": "Combo Breaker", "sku": "STK-007", "category": "Gaming", "description": "Arcade combo vinyl sticker", "price": 15.00, "stock": 65, "reorder_level": 10},
+            {
+                "product_name": "Express Wash",
+                "sku": "LCS-001",
+                "category": "Exterior Wash",
+                "description": "Foam wash, high-pressure rinse, tire dressing, and scratch-free microfiber hand dry. Fast 30-min service.",
+                "price": 150.00,
+                "stock": 100,
+                "reorder_level": 10
+            },
+            {
+                "product_name": "Full Service Wash",
+                "sku": "LCS-002",
+                "category": "Inside & Out",
+                "description": "Exterior foam wash plus interior cabin vacuum, dash & console wipe, window glass cleaning, and mat wash.",
+                "price": 250.00,
+                "stock": 100,
+                "reorder_level": 10
+            },
+            {
+                "product_name": "Premium Detail",
+                "sku": "LCS-003",
+                "category": "Deep Clean",
+                "description": "Comprehensive interior detailing, leather conditioner, hand carnauba wax seal, door jamb clean, and deodorizer.",
+                "price": 650.00,
+                "stock": 50,
+                "reorder_level": 5
+            },
+            {
+                "product_name": "Motorcycle Wash",
+                "sku": "LCS-004",
+                "category": "Two Wheels",
+                "description": "Delicate hand wash, wheel & chain degreasing, spotless rinse, air blower dry, and protective spray wax.",
+                "price": 100.00,
+                "stock": 100,
+                "reorder_level": 10
+            },
+            {
+                "product_name": "Interior Deep Clean & Sanitation",
+                "sku": "LCS-005",
+                "category": "Interior Detailing",
+                "description": "Deep shampoo extraction for fabric seats and carpets, steam sanitization, leather conditioning, and AC mist.",
+                "price": 450.00,
+                "stock": 50,
+                "reorder_level": 5
+            },
+            {
+                "product_name": "Ceramic Coating & Paint Shield",
+                "sku": "LCS-006",
+                "category": "Paint Protection",
+                "description": "Multi-stage clay bar decontamination, machine polish swirl removal, and nano-ceramic hydrophobic shield.",
+                "price": 1200.00,
+                "stock": 30,
+                "reorder_level": 5
+            },
+            {
+                "product_name": "Engine Bay Detailing",
+                "sku": "LCS-007",
+                "category": "Engine Care",
+                "description": "Safe degreasing of grease and road grime, delicate electrical masking, and high-temp rubber & plastic dressing.",
+                "price": 350.00,
+                "stock": 40,
+                "reorder_level": 5
+            },
+            {
+                "product_name": "Headlight Restoration",
+                "sku": "LCS-008",
+                "category": "Restoration",
+                "description": "Multi-grit wet sanding, optical compounding, and UV-resistant sealant to restore cloudy or yellowed lenses.",
+                "price": 250.00,
+                "stock": 50,
+                "reorder_level": 5
+            }
         ]
         supabase.table("products").insert(starter_products).execute()
         print("Database initialized successfully with default admin and starter products.")
@@ -206,7 +271,9 @@ def register_page():
 @app.route("/shop")
 def shop_page():
     if "user_id" not in session:
-        return redirect("/login")
+        qs = request.query_string.decode("utf-8") if request.query_string else ""
+        next_target = f"/shop?{qs}" if qs else "/shop"
+        return redirect(f"/login?next={next_target}")
     if session.get("role") != "Customer":
         return redirect("/dashboard")
     return send_from_directory(FRONTEND_FOLDER, "shop.html")

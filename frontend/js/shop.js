@@ -30,13 +30,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // ── IMAGE HELPERS ──────────────────────────────────────────────────
   const DEFAULT_PHOTOS = {
+    "express": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=600&q=80",
+    "full service": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80",
+    "inside": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80",
+    "detail": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&q=80",
+    "premium": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&q=80",
+    "motorcycle": "https://images.unsplash.com/photo-1558618047-f7ae14c3e7bc?w=600&q=80",
+    "interior": "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?w=600&q=80",
+    "ceramic": "https://images.unsplash.com/photo-1563720223185-11003d516935?w=600&q=80",
+    "shield": "https://images.unsplash.com/photo-1563720223185-11003d516935?w=600&q=80",
+    "engine": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=600&q=80",
+    "headlight": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&q=80",
+    "restoration": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&q=80",
     "exterior": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=600&q=80",
     "wash": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-    "detail": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&q=80",
-    "motorcycle": "https://images.unsplash.com/photo-1558618047-f7ae14c3e7bc?w=600&q=80",
-    "anime": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&q=80",
-    "gaming": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80",
-    "skate": "https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?w=600&q=80",
     "default": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=600&q=80"
   };
 
@@ -228,6 +235,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     await loadProducts();
     await loadOrders();
+
+    // Check if a service was requested via URL query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get("service") || urlParams.get("add");
+    if (serviceParam && products.length) {
+      const match = products.find(p =>
+        String(p.id) === serviceParam ||
+        p.sku?.toLowerCase() === serviceParam.toLowerCase() ||
+        p.product_name?.toLowerCase().includes(serviceParam.toLowerCase())
+      );
+      if (match) {
+        cart[match.id] = (cart[match.id] || 0) + 1;
+        save();
+        renderCart();
+        toast(`${match.product_name} added to your booking!`);
+        if (urlParams.get("scroll") === "cart") {
+          setTimeout(() => {
+            $("cart")?.scrollIntoView({ behavior: "smooth" });
+          }, 300);
+        }
+      }
+    }
   } catch (error) {
     console.error("Customer portal error:", error);
     message("Unable to load services.", true);
