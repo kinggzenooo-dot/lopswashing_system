@@ -40,10 +40,41 @@
       <p>Create your Lops Carwash account to keep track of your visits and get convenient access to our wash services.</p>
 
       <ul class="perk-list">
-        <li><span class="ic">📦</span> Track every order in one place</li>
-        <li><span class="ic">⚡</span> Faster repeat bookings</li>
-        <li><span class="ic">🎁</span> Member-only discount codes</li>
+        <li>
+          <span class="perk-icon">
+            <!-- Box outline SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </span>
+          Track every order in one place
+        </li>
+        <li>
+          <span class="perk-icon">
+            <!-- Lightning bolt SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </span>
+          Faster repeat bookings
+        </li>
+        <li>
+          <span class="perk-icon">
+            <!-- Star SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </span>
+          Member-only discount codes
+        </li>
       </ul>
+
+      <div class="pitch-photo-wrap">
+        <img src="https://images.unsplash.com/photo-1573416985-96ca88696db0?w=800&q=80" alt="Professional carwash service" class="pitch-photo" loading="lazy">
+        <div class="pitch-photo-caption">Trusted by 500+ drivers in Cebu City</div>
+      </div>
     </div>
 
     <div class="register-card">
@@ -70,7 +101,12 @@
         <div class="form-row">
           <div class="field">
             <label for="regPassword">Password</label>
-            <input type="password" id="regPassword" name="password" placeholder="••••••••" required minlength="8">
+            <div class="field-wrap">
+              <input type="password" id="regPassword" name="password" placeholder="••••••••" required minlength="8">
+              <button type="button" class="pwd-toggle" aria-label="Show password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
           </div>
           <div class="field">
             <label for="regConfirm">Confirm Password</label>
@@ -95,5 +131,15 @@
 </section>
 
 <script src="/js/main.js"></script>
+<script>
+document.querySelectorAll('.pwd-toggle').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var inp=btn.parentElement.querySelector('input');
+    var show=inp.type==='password';
+    inp.type=show?'text':'password';
+    btn.setAttribute('aria-label',show?'Hide password':'Show password');
+  });
+});
+</script>
 </body>
 </html>
