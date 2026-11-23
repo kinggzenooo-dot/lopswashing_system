@@ -98,7 +98,7 @@ BEGIN
         VALUES (
             'Lops Carwash Administrator',
             'admin@lopscarwash.ph',
-            'scrypt:32768:8:1$hU97jGk5bQv5qM6r$89e902b9e1cbcae434f4b8cf6b7617b7194f475f56a3e5c9fceae81431f413340578aa68784013483dfdb319eb3f339cf0193498305c4323c6f2ee3f25c79216',
+            'scrypt:32768:8:1$MOHz1b1p1wjUC7du$31f0e6e9e3fa24097635f63ea64e84e2dea1f138f7cea43948de321cabef445526676fd798a5bd96621de39d4c5fa57295acd904698367ae335b14804d4bbe27',
             'Administrator'
         );
 
